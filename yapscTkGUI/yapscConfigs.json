@@ -1,0 +1,9 @@
+{
+    "graphBufferLen": 30,
+    "resolution": "1200x1000",
+    "titleVersion": "YAPSC GUI interface v 1.0",
+    "plotInterval": 100,
+    "serialTimeout": 0.07,
+    "maxLen": 254,
+    "refreshRate": 0.5
+}

@@ -1,0 +1,3 @@
+https://github.com/peterhinch/micropython_eeprom
+https://github.com/gastmaier/micropython-simple-pid
+https://github.com/jamon/pi-pico-pio-quadrature-encoder
