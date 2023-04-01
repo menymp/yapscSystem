@@ -263,7 +263,14 @@ class yapscState():
 		outArgs = respArr[5].split(',')
 		if len(outArgs) != 2:
 			raise Exception('format error')
-		if (bool(outArgs[1])):
+		if ("True" in outArgs[1]):
+			dir = True
+		elif ("False" in outArgs[1]):
+			dir = False
+		else:
+			raise Exception('direction arg unknown')
+		#get sign
+		if dir:
 			outVal = -int(outArgs[0])
 		else:
 			outVal = int(outArgs[0])
@@ -278,7 +285,9 @@ class yapscState():
 		#print(stateValObj)
 		#update GUI data plot
 		self.yapscGuiRef.pushStateValues(stateValObj)
-		self.yapscGuiRef.setValue("OutSpeed",(outVal, int(outArgs[0])))
+		print(outArgs)
+		print(dir)
+		self.yapscGuiRef.setValue("OutSpeed",(outVal, dir))
 		pass
 	
 	def _integrityCheck(self, args):
