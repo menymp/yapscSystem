@@ -153,6 +153,12 @@ class yapscState():
 			response = self.yapscControllerRef.executeCmd(cmd)
 			#print("ki write: " + cmd)
 			self.yapscGuiRef.appendLog(response)
+		if cmdObj["type"] == "BaseDir" and cmdObj["command"] == "WRITE":
+			cmd="invert,direction\n"
+			response = self.yapscControllerRef.executeCmd(cmd)
+			self.yapscGuiRef.appendLog(response)
+			respArr = response.split(':')
+			#self.yapscGuiRef.setValue(cmdObj["type"], respArr[1])
 		pass
 
 		
@@ -209,6 +215,7 @@ class yapscState():
 				outParr = self.yapscControllerRef.executeCmd("get,output\n").split(':')
 				outArr = outParr[1].split(',')
 				outLimitsArr = pidDataArr[5].replace("(","").replace(")","").split(",")
+				 
 				#print(pidDataArr)
 				#print(outArr)
 				#print(outLimitsArr)
@@ -223,7 +230,7 @@ class yapscState():
 					"encoder":int(setpointStr),
 					"kp":float(pidDataArr[1]),
 					"kd":float(pidDataArr[2]),
-					"ki":float(pidDataArr[3])
+					"ki":float(pidDataArr[3]),
 				}
 				print(valuesObj)
 				self.yapscGuiRef.setCurrentValues(valuesObj)
@@ -249,15 +256,14 @@ class yapscState():
 	
 	def _getStateValues(self, args):
 		#integrity check
+		#print(args)
 		if not "SERVO_OK" in args:
 			raise Exception('wrong signal')
 		
 		respArr = args.split(':')
 		#print(args)
-		#print(respArr)
-		if len(respArr) != 6 or respArr[0] != "stateValues":
+		if len(respArr) != 7 or respArr[0] != "stateValues":
 			raise Exception('format error')
-		
 		
 		#parse output value as special case for sign
 		outArgs = respArr[5].split(',')
@@ -269,6 +275,13 @@ class yapscState():
 			dir = False
 		else:
 			raise Exception('direction arg unknown')
+		
+		if ("True" in respArr[6]):
+			basedir = True
+		elif ("False" in respArr[6]):
+			basedir = False
+		else:
+			raise Exception('base direction arg unknown')
 		#get sign
 		if dir:
 			outVal = -int(outArgs[0])
@@ -285,9 +298,8 @@ class yapscState():
 		#print(stateValObj)
 		#update GUI data plot
 		self.yapscGuiRef.pushStateValues(stateValObj)
-		print(outArgs)
-		print(dir)
 		self.yapscGuiRef.setValue("OutSpeed",(outVal, dir))
+		self.yapscGuiRef.setValue("BaseDir",str(basedir))
 		pass
 	
 	def _integrityCheck(self, args):

@@ -263,7 +263,12 @@ class yapscGui():
 		self.kiS.set("0")
 		self.spinki = Spinbox(controlPidFrame, from_=0, to=999999999, textvariable = self.kiS, width=5)
 		self.spinki.grid(column=3, row=9)
-		
+		#######
+		#controls for change base direction at runtime
+		invertDirBtn = Button(controlPidFrame, text="Invert", command=lambda: self._onClick_ctrlCmd("BaseDir","WRITE",0))
+		invertDirBtn.grid(column=4,row=6)
+		self.dirLabel = Label(controlPidFrame, text = "dir: ")
+		self.dirLabel.grid(column=4,row=7)
 		############################################
 		eepromFrame = LabelFrame(self.window, width=500, height=500, text="EEPROM")
 		eepromFrame.grid(column=0, row=3)
@@ -432,6 +437,8 @@ class yapscGui():
 			self.kdS.set(value)
 		elif(type == "Ki"):
 			self.kiS.set(value)
+		elif(type == "BaseDir"):
+			self.dirLabel.configure(text=value)
 		pass
 		#{
 		#	"state":"connected",
