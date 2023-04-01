@@ -72,7 +72,8 @@ def commandExecute(servoObj):
             tmpArr = servoObj.getOutput()
             encVal = servoObj.getEncoderVal()
             errVal = servoObj.getError()
-            servoObj.writeSerial("stateValues:"+keepaliveR+":"+str(errVal)+":"+str(encVal)+":"+str(setpoint)+":"+str(tmpArr[0])+","+str(tmpArr[1])+"\n")
+            baseDir = servoObj.getCurrentDirection()
+            servoObj.writeSerial("stateValues:"+keepaliveR+":"+str(errVal)+":"+str(encVal)+":"+str(setpoint)+":"+str(tmpArr[0])+","+str(tmpArr[1])+":"+str(baseDir)+"\n")
         elif(cmdArray[0] == "get" and cmdArray[1] == "stepDir"):
             #get stepdir register OK
             servoObj.writeSerial("stepDir:"+str(servoObj.getStepDirVal())+"\n")
@@ -99,6 +100,11 @@ def commandExecute(servoObj):
             #set direction OK
             servoObj.setCurrentDirection(int(cmdArray[2]))
             servoObj.writeSerial("direction:OK\n")
+        elif(cmdArray[0] == "invert" and cmdArray[1] == "direction"):
+            #set direction OK
+            valDir = servoObj.getCurrentDirection()
+            servoObj.setCurrentDirection(not valDir)
+            servoObj.writeSerial("direction:"+str(servoObj.getCurrentDirection())+"\n")
         elif(cmdArray[0] == "get" and cmdArray[1] == "setpoint"):
             #get setpoint OK
             setpoint = servoObj.getSetpoint()
