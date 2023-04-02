@@ -1,5 +1,6 @@
 from rp2 import PIO, StateMachine, asm_pio
 from machine import Pin
+import utime
 
 class stepDirInterface():
     def __init__(self, stepPin, dirPin,  machineId = 0):
@@ -41,17 +42,19 @@ class stepDirInterface():
         jmp("wait_risingEdge")
 
 #functional tests for step dir module, test pins under 27 and 26 gpio pins
-'''
-'''
+
+
 '''
 step = machine.Pin(27, machine.Pin.OUT)
 dir = machine.Pin(26, machine.Pin.OUT) 
-stepDirObj = stepDirInterface(16,17)
+stepDirObj = stepDirInterface(18,19)
 y = 0;
 
 def funcTestStepDir():
     y = stepDirObj.getEncoderPos()
     print('initial = ' + str(y))
+    utime.sleep(0.5)
+    
     step.off()
     dir.on()
     utime.sleep(0.1)
@@ -68,6 +71,8 @@ def funcTestStepDir():
     step.off()
     y = stepDirObj.getEncoderPos()
     print('next = ' + str(y))
+    '''
+    '''
     step.off()
     dir.off()
     utime.sleep(0.1)
@@ -85,4 +90,9 @@ def funcTestStepDir():
     y = stepDirObj.getEncoderPos()
     print('end = ' + str(y))
     utime.sleep(3)
-'''
+    '''
+    '''
+if __name__ == "__main__":
+    while True:
+        funcTestStepDir()
+        '''

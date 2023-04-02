@@ -119,7 +119,7 @@ class servoController():
 			return 0
 		self.spLock1.acquire()
 		if(self.getMode() == Mode.STEP_DIR):
-			self.setSetpoint(self._readStepDirReg())
+			self._readStepDirReg()
 		pos = self._readEncoderReg()
 		setpoint = self.getSetpoint()
 		self.error = setpoint - pos #calculate error
@@ -129,6 +129,7 @@ class servoController():
 	def _readStepDirReg(self):
 		self.spLock3.acquire()
 		self.stepDirVal = self.StepDirInterface.getEncoderPos()
+		self.PID_Controller.setpoint = self.StepDirInterface.getEncoderPos()
 		self.spLock3.release()
 		return self.stepDirVal
 	

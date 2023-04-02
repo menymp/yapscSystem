@@ -26,7 +26,7 @@ def core1_task(servoObj):
 #Configure interfaces and main servo object
 def initServoInterface():
     encoder = quadraturePioEncoder(2,3)  #quadrature encoder on pins 2 and 3
-    stepDirObj = stepDirInterface(16,17) #step dir interface for cnc control on 16 and 17 pins
+    stepDirObj = stepDirInterface(18,19) #step dir interface for cnc control on 18 and 19 pins
     serialObj = serialInterface(uartId = 1, baudrate = 9600, txPin = 4, rxPin= 5) #serial uart pins 4 and 5
     eeprObj = EepromConfigsInterface(sclPin = 27, sdaPin = 26, baseId = 1) #eeprom i2c memory on pin 27 and 26
     motorOutObj = motorDriver(pin_A = 16,pin_B = 17,frequency = 80_000) #pwm differential interface running at 80 Khz at pins 16 and 17

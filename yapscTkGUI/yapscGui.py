@@ -78,9 +78,9 @@ class yapscGui():
 		modeframe.grid(column=0, row=1)
 		self.modeVar = IntVar()
 		self.modeVar.set(1)
-		radModeStepDir = Radiobutton(modeframe,command = self._onChange_mode,variable = self.modeVar,text='STEP DIR', value=1)
+		radModeStepDir = Radiobutton(modeframe,command = self._onChange_mode,variable = self.modeVar,text='STEP DIR', value=0)
 		radModeStepDir.pack()
-		radModeUsb = Radiobutton(modeframe,command = self._onChange_mode,variable = self.modeVar,text='USB', value=0)
+		radModeUsb = Radiobutton(modeframe,command = self._onChange_mode,variable = self.modeVar,text='USB', value=1)
 		radModeUsb.pack()
 		
 		#state select frame
@@ -111,19 +111,19 @@ class yapscGui():
 		self.setpointS = StringVar()
 		self.setpointS.set("0")
 		self.spinSetpoint = Spinbox(controlPidFrame, from_=0, to=999999999, textvariable = self.setpointS,  width=5)
-		self.spinSetpoint.grid(column=3, row=0)
+		self.spinSetpoint.grid(column=3, row=0, columnspan = 2,  sticky='EWNS')
 		#spinSetpoint.pack(side='left', padx = 1, pady = 1, fill=tk.X)	
 		btnSetpointderInc = Button(controlPidFrame, text="<-", command=lambda: self._incSetpoint())
-		btnSetpointderInc.grid(column=4, row=0)																					
+		btnSetpointderInc.grid(column=3, row=1)																					
 		btnSetpointizqInc = Button(controlPidFrame, text="->", command=lambda: self._decSetpoint())
-		btnSetpointizqInc.grid(column=5, row=0)
+		btnSetpointizqInc.grid(column=4, row=1)
 		#lbl error text
 		errtxtLblMsg = Label(controlPidFrame, text="error: ")
 		errtxtLblMsg.grid(column=0, row=1)
 		#errtxtLblMsg.pack(side=tk.LEFT)
 		#lbl error value
 		self.errvalLblMsg = Label(controlPidFrame, text="0.0")
-		self.errvalLblMsg.grid(column=3, row=1)
+		self.errvalLblMsg.grid(column=1, row=1)
 		#errvalLblMsg.pack(side=tk.LEFT)		
 		############################################
 		sampletLblMsg = Label(controlPidFrame, text="Sample time: ")
@@ -140,7 +140,7 @@ class yapscGui():
 		self.sampletS = StringVar()
 		self.sampletS.set("0")
 		self.spinSamplet = Spinbox(controlPidFrame, from_=0, to=999999999, textvariable = self.sampletS, width=5)
-		self.spinSamplet.grid(column=3, row=2)
+		self.spinSamplet.grid(column=3, row=2, columnspan = 2,  sticky='EWNS')
 		#spinSetpoint.pack(side='left', padx = 1, pady = 1, fill=tk.X)	
 		############################################
 		outlowLblMsg = Label(controlPidFrame, text="Out limit low: ")
@@ -157,7 +157,7 @@ class yapscGui():
 		self.outlowS = StringVar()
 		self.outlowS.set("0")
 		self.spinoutlow = Spinbox(controlPidFrame, from_=0, to=999999999, textvariable = self.outlowS, width=5)
-		self.spinoutlow.grid(column=3, row=3)
+		self.spinoutlow.grid(column=3, row=3, columnspan = 2,  sticky='EWNS')
 		#spinSetpoint.pack(side='left', padx = 1, pady = 1, fill=tk.X)	
 		############################################
 		outhighLblMsg = Label(controlPidFrame, text="Out limit high: ")
@@ -174,7 +174,7 @@ class yapscGui():
 		self.outhighS = StringVar()
 		self.outhighS.set("0")
 		self.spinouthigh = Spinbox(controlPidFrame, from_=0, to=999999999,  textvariable = self.outhighS, width=5)
-		self.spinouthigh.grid(column=3, row=4)
+		self.spinouthigh.grid(column=3, row=4, columnspan = 2,  sticky='EWNS')
 		#spinSetpoint.pack(side='left', padx = 1, pady = 1, fill=tk.X)		
 		############################################
 		outspeedLblMsg = Label(controlPidFrame, text="Output speed dir: ")
@@ -191,12 +191,12 @@ class yapscGui():
 		self.outspeedS = StringVar()
 		self.outspeedS.set("0")
 		self.spinoutspeed = Spinbox(controlPidFrame, from_=0,  textvariable = self.outspeedS, to=999999999, width=5)
-		self.spinoutspeed.grid(column=3, row=5)
+		self.spinoutspeed.grid(column=3, row=5, columnspan = 2,  sticky='EWNS')
 		#spinSetpoint.pack(side='left', padx = 1, pady = 1, fill=tk.X)	
 		self.dirVar = IntVar()
 		self.dirVar.set(1)
 		radoutdirTrueEnable = Radiobutton(controlPidFrame,command = self._onChange_direction, variable = self.dirVar, text='DIR A', value=1)	
-		radoutdirTrueEnable.grid(column=4, row=5)	
+		radoutdirTrueEnable.grid(column=5, row=4)	
 		radoutdirFalseEnable = Radiobutton(controlPidFrame,command = self._onChange_direction, variable = self.dirVar,text='DIR B', value=0)	
 		radoutdirFalseEnable.grid(column=5, row=5)	
 		############################################
@@ -214,7 +214,7 @@ class yapscGui():
 		self.encoderS = StringVar()
 		self.encoderS.set("0")
 		self.spinencoder = Spinbox(controlPidFrame, from_=0, to=999999999, textvariable = self.encoderS, width=5)
-		self.spinencoder.grid(column=3, row=6)		
+		self.spinencoder.grid(column=3, row=6, columnspan = 2,  sticky='EWNS')		
 		############################################
 		kpLblMsg = Label(controlPidFrame, text="Kp: ")
 		kpLblMsg.grid(column=0, row=7)
@@ -230,7 +230,7 @@ class yapscGui():
 		self.kpS = StringVar()
 		self.kpS.set("0")
 		self.spinkp = Spinbox(controlPidFrame, from_=0, to=999999999, textvariable = self.kpS, width=5)
-		self.spinkp.grid(column=3, row=7)	
+		self.spinkp.grid(column=3, row=7, columnspan = 2,  sticky='EWNS')	
 		############################################
 		kdLblMsg = Label(controlPidFrame, text="Kd: ")
 		kdLblMsg.grid(column=0, row=8)
@@ -246,7 +246,7 @@ class yapscGui():
 		self.kdS = StringVar()
 		self.kdS.set("0")
 		self.spinkd = Spinbox(controlPidFrame, from_=0, to=999999999, textvariable = self.kdS, width=5)
-		self.spinkd.grid(column=3, row=8)
+		self.spinkd.grid(column=3, row=8, columnspan = 2,  sticky='EWNS')
 		############################################
 		kiLblMsg = Label(controlPidFrame, text="Ki: ")
 		kiLblMsg.grid(column=0, row=9)
@@ -262,13 +262,13 @@ class yapscGui():
 		self.kiS = StringVar()
 		self.kiS.set("0")
 		self.spinki = Spinbox(controlPidFrame, from_=0, to=999999999, textvariable = self.kiS, width=5)
-		self.spinki.grid(column=3, row=9)
+		self.spinki.grid(column=3, row=9, columnspan = 2,  sticky='EWNS')
 		#######
 		#controls for change base direction at runtime
 		invertDirBtn = Button(controlPidFrame, text="Invert", command=lambda: self._onClick_ctrlCmd("BaseDir","WRITE",0))
-		invertDirBtn.grid(column=4,row=6)
+		invertDirBtn.grid(column=5,row=6)
 		self.dirLabel = Label(controlPidFrame, text = "dir: ")
-		self.dirLabel.grid(column=4,row=7)
+		self.dirLabel.grid(column=5,row=7)
 		############################################
 		eepromFrame = LabelFrame(self.window, width=500, height=500, text="EEPROM")
 		eepromFrame.grid(column=0, row=3)
