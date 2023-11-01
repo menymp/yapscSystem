@@ -1,0 +1,28 @@
+pdf en checo
+https://www.cnc.info.pl/frezarka-1650-650-250-t35085-100.html
+fotos tarjeta controladora a pasos
+https://cnctar.hobbycnc.hu/Adam/CNC/MAVILOR/
+
+informacion sobre driver
+https://www.cnczone.com/forums/archive/index.php/t-154574.html
+
+antiguo diseno 2005
+https://www.cnczone.com/forums/open-source-controller-boards/74532-yapsc-10v-glue-step-dir-10v-servo.html
+
+comprar convertidor
+https://www.ebay.com/itm/CNC-Board-YAPSC-10V-converter-STEP-DIR-interfaces-to-analog-10v/163303081500?hash=item26059f461c:g:CbcAAOSwN3Nb6pzh
+
+
+tarjeta de control
+https://www.ebay.com/itm/PHILIPS-NE08-402259451092-5008080080-AT4043-100-OP451-BOARD-/370817312844?_ul=BO
+
+firmware
+https://github.com/OakDevel/dsPic-Servo-OakDevel-Edition
+
+https://www.dropbox.com/sh/ukhld79r6ol1lsc/AAAAsFp3dbGSoXyekd8MNBr7a
+
+Encoder
+https://www.electromate.com/assets/catalog-library/pdfs/maxon/Maxon_2015_2016_Catalog.pdf
+
+Encoder hp
+heds-9140
