@@ -177,9 +177,6 @@ class servoController():
 			direction = not self.getCurrentDirection()
 		#print(pos)
 		response = self.PID_Controller(pos) #composite pos with setpoint to absolute response
-		#response = 0
-		#print(response)
-		#print(direction)
 		self.setOutput(direction, response)
 		self.spLock10.release()
 		#print("kl")
